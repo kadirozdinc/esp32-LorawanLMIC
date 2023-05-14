@@ -188,12 +188,6 @@
     #define PIN_LMIC_DIO1     14
     #define PIN_LMIC_DIO2     26
 
-    // #define PIN_LMIC_NSS      14
-    // #define PIN_LMIC_RST      12
-    // #define PIN_LMIC_DIO0     4
-    // #define PIN_LMIC_DIO1     26
-    // #define PIN_LMIC_DIO2     27
-
     // #define PIN_LMIC_NSS      7
     // #define PIN_LMIC_RST      8
     // #define PIN_LMIC_DIO0     13
