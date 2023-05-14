@@ -186,7 +186,19 @@
     #define PIN_LMIC_RST      13
     #define PIN_LMIC_DIO0     12
     #define PIN_LMIC_DIO1     14
-    #define PIN_LMIC_DIO2     27
+    #define PIN_LMIC_DIO2     26
+
+    // #define PIN_LMIC_NSS      14
+    // #define PIN_LMIC_RST      12
+    // #define PIN_LMIC_DIO0     4
+    // #define PIN_LMIC_DIO1     26
+    // #define PIN_LMIC_DIO2     27
+
+    // #define PIN_LMIC_NSS      7
+    // #define PIN_LMIC_RST      8
+    // #define PIN_LMIC_DIO0     13
+    // #define PIN_LMIC_DIO1     14
+    // #define PIN_LMIC_DIO2     26
 
 #endif
 
@@ -364,7 +376,7 @@ ostime_t sleepTimeout;
 # define FILLMEIN_8     1, 0, 0, 0, 0, 0, 0, 0
 # define FILLMEIN_16    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2
 #else
-# warning "You must replace the values marked FILLMEIN with real values from the TTN control panel!"
+//# warning "You must replace the values marked FILLMEIN with real values from the TTN control panel!"
 # define FILLMEIN_8 (#dont edit this, edit the lines that use FILLMEIN_8)
 # define FILLMEIN_16 (#dont edit this, edit the lines that use FILLMEIN_16)
 #endif
