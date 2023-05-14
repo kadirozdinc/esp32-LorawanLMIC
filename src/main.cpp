@@ -28,6 +28,7 @@
 // MCCI Arduino LoRaWAN Library         0.9.2
 // LoRa_Serialization                   3.2.1
 //
+//
 // created: 07/2022
 //
 //
@@ -87,7 +88,6 @@
 // (Add other networks here)
 
 #include <Arduino.h>
-#include <SPI.h>
 #include <Arduino_LoRaWAN_network.h>
 #include <Arduino_LoRaWAN_EventLog.h>
 #include <arduino_lmic.h>
@@ -118,7 +118,7 @@
 //-----------------------------------------------------------------------------
 
 // LoRa_Serialization
-//#include <LoraMessage.h>
+#include <LoraMessage.h>
 
 // Pin mappings for some common ESP32 LoRaWAN boards.
 // The ARDUINO_* defines are set by selecting the appropriate board (and borad variant, if applicable) in the Arduino IDE.
@@ -182,11 +182,11 @@
     // LoRaWAN_Node board
     // https://github.com/matthias-bs/LoRaWAN_Node
     // (or anything else)
-    #define PIN_LMIC_NSS      14
-    #define PIN_LMIC_RST      12
-    #define PIN_LMIC_DIO0     4
-    #define PIN_LMIC_DIO1     16
-    #define PIN_LMIC_DIO2     17
+    #define PIN_LMIC_NSS      5
+    #define PIN_LMIC_RST      13
+    #define PIN_LMIC_DIO0     12
+    #define PIN_LMIC_DIO1     14
+    #define PIN_LMIC_DIO2     27
 
 #endif
 
@@ -259,9 +259,9 @@ public:
     uint16_t getVoltageBattery(void);
     uint16_t getVoltageSupply(void);
     
-    bool uplinkRequest(void) {
-        m_fUplinkRequest = true;
-    };
+void uplinkRequest(void) {
+     m_fUplinkRequest = true;
+};
     ///
     /// \brief set up the sensor object
     ///
@@ -358,7 +358,7 @@ ostime_t sleepTimeout;
 // COMPILE_REGRESSION_TEST, and in that case we define FILLMEIN_x to non-
 // working but innocuous values.
 //
- #define COMPILE_REGRESSION_TEST 1
+// #define COMPILE_REGRESSION_TEST 1
 
 #ifdef COMPILE_REGRESSION_TEST
 # define FILLMEIN_8     1, 0, 0, 0, 0, 0, 0, 0
@@ -853,16 +853,15 @@ cSensor::doUplink(void) {
     // Serialize data into byte array
     // NOTE: 
     // For TTN MQTT integration, ttn_decoder.js must be adjusted accordingly 
-
-    // LoraEncoder encoder(loraData);
-    // encoder.writeBitmap(false, false, false, false, false,
-    //                     runtimeExpired,
-    //                     data_ok,
-    //                     battery_ok);              // 1 Byte
-    // encoder.writeTemperature(temperature_deg_c);  // 2 Bytes
-    // encoder.writeUint8(humidity_percent);         // 1 Byte
-    // encoder.writeUint16(supply_voltage_v);        // 2 Bytes
-    // encoder.writeUint16(battery_voltage_v);       // 2 Bytes
+    LoraEncoder encoder(loraData);
+    encoder.writeBitmap(false, false, false, false, false,
+                        runtimeExpired,
+                        data_ok,
+                        battery_ok);              // 1 Byte
+    encoder.writeTemperature(temperature_deg_c);  // 2 Bytes
+    encoder.writeUint8(humidity_percent);         // 1 Byte
+    encoder.writeUint16(supply_voltage_v);        // 2 Bytes
+    encoder.writeUint16(battery_voltage_v);       // 2 Bytes
 
 
     this->m_fBusy = true;
